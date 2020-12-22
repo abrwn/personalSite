@@ -1,0 +1,45 @@
+canvas {
+  background-color: black;
+  position: absolute;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: normal;
+  margin: 16px;
+  letter-spacing: 5px;
+}
+
+p {
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: orangered;
+  transition: all 0.5s linear;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  top: 130px;
+  max-width: 485px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-family: 'Piazzolla', serif;
+}
+
+@media only screen and (max-width: 530px) {
+  h1 {
+    font-size: 40px;
+  }
+}
