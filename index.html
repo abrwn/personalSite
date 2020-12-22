@@ -1,0 +1,93 @@
+<head>
+  <style>
+    canvas {
+      background-color: black;
+      position: absolute;
+    }
+
+    h1 {
+      font-size: 70px;
+      font-weight: normal;
+      margin: 16px;
+      letter-spacing: 5px;
+    }
+
+    p {
+      font-size: 16px;
+      letter-spacing: 3px;
+    }
+
+    a {
+      color: white;
+    }
+
+    a:hover {
+      color: orangered;
+      transition: all 0.5s linear;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      top: 100px;
+      max-width: 470px;
+      padding: 30px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const canvas = document.getElementById('canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext('2d');
+      const addParticle = () => {
+        let posX = Math.floor(Math.random() * canvas.width);
+        let posY = canvas.height;
+        let interval = setInterval(function () {
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(0, 0, 0, ${1 * (posY / canvas.height)})`;
+          ctx.fillRect(posX - 1, posY, 2, 10);
+          if (posY > -10) {
+            posY -= 1;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255, ${255 * (posY / canvas.height)}, 0, ${1 * (posY / canvas.height)})`;
+            ctx.moveTo(posX, posY);
+            ctx.lineTo(posX, posY + 10);
+            ctx.closePath();
+            ctx.stroke();
+          } else {
+            clearInterval(interval);
+          }
+        }, Math.floor(Math.random() * 20));
+      };
+
+      setInterval(addParticle, 500);
+    });
+
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    })
+
+
+  </script>
+  <canvas id="canvas">
+  </canvas>
+  <div class="content">
+    <h1>Alex Browne</h1>
+    <p><em>London-based frontend developer</em></p>
+    <p>Find me on <a target="_blank" rel="noopener noreferrer"
+        href="https://uk.linkedin.com/pub/alex-browne/95/a30/863">LinkedIn</a></p>
+  </div>
+</body>
