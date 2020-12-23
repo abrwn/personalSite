@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
   const addParticle = () => {
     const posX = Math.floor(Math.random() * canvas.width);
-    let posY = Math.floor(Math.random() * canvas.height);
-
+    let posY = Math.floor((Math.random() * canvas.height) + (canvas.height / 2));
     const interval = setInterval(() => {
       ctx.beginPath();
       ctx.fillStyle = `rgba(${50 * modifierY}, 0, 0, ${posY / canvas.height})`;
@@ -26,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         clearInterval(interval);
       }
-    }, Math.random() * 20);
+    }, Math.floor(20 + (Math.random() * 30) - (modifierY * 50)));
   };
-  
-  setInterval(addParticle, (1000 * modifierX) + 200);
+
+  setInterval(addParticle, 500);
 });
 
 document.addEventListener('mousemove', (e) => {
