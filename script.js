@@ -1,5 +1,5 @@
-let modifier1 = 0;
-let modifier2 = 0;
+let modifierX = 0.5;
+let modifierY = 0.5;
 
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('canvas');
@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
   const addParticle = () => {
     const posX = Math.floor(Math.random() * canvas.width);
-    let posY = canvas.height;
+    let posY = Math.floor(Math.random() * canvas.height);
 
     const interval = setInterval(() => {
       ctx.beginPath();
-      ctx.fillStyle = `rgba(${30 * modifier2}, 0, 0, ${posY / canvas.height})`;
+      ctx.fillStyle = `rgba(${50 * modifierY}, 0, 0, ${posY / canvas.height})`;
       ctx.fillRect(posX - 1, posY, 2, 10);
 
       if (posY > -10) {
         posY -= 1;
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(${255 * modifier1}, ${255 * (posY / canvas.height)}, 50, ${posY / canvas.height})`;
+        ctx.strokeStyle = `rgba(${255 * modifierX}, ${255 * (posY / canvas.height)}, 50, ${posY / canvas.height})`;
         ctx.moveTo(posX, posY);
         ctx.lineTo(posX, posY + 10);
         ctx.closePath();
@@ -29,12 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }, Math.random() * 20);
   };
   
-  setInterval(addParticle, (1000 * modifier1) + 200);
+  setInterval(addParticle, (1000 * modifierX) + 200);
 });
 
 document.addEventListener('mousemove', (e) => {
-  modifier1 = e.x / window.innerWidth;
-  modifier2 = e.y / window.innerHeight;
+  modifierX = e.x / window.innerWidth;
+  modifierY = e.y / window.innerHeight;
+});
+
+document.addEventListener('touchmove', (e) => {
+  modifierX = e.touches[0].pageX / window.innerWidth;
+  modifierY = e.touches[0].pageY / window.innerHeight;
 });
 
 window.addEventListener('resize', () => {
